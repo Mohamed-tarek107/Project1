@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reset Password
+{% endblock %}
+
+{% block main %}
+<form action="/forget" method="POST">  
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" required placeholder="Your Email" type="email">
+    </div>
+    <div class="mb-3">
+        <input autocomplete="off" class="form-control mx-auto w-auto" name="newpass" required placeholder="New Password" type="password">
+    </div>
+    <div class="mb-3">
+        <input autocomplete="off" class="form-control mx-auto w-auto" name="newpassagain" required placeholder="Confirm Password" type="password">
+    </div>
+    <button class="btn btn-primary" type="submit">Reset Password</button>
+</form>
+
+{% endblock %}

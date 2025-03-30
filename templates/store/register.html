@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    <div class="login-page">
+        <div class="container mt-5 d-flex justify-content-center" id="main-container">
+            <div class="card p-4" style="width: 400px;">
+                <form action="{{ url_for('login') }}" method="post">
+                    <div class="mb-4">
+                        <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="email">
+                    </div>
+                    <div class="mb-4">
+                        <input class="form-control" name="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="mb-4">
+                        <input class="form-control" name="passagain" placeholder="Confirm Password" type="password">
+                    </div>
+                    <div class="d-grid">
+                        <!-- register Button -->
+                        <button class="btn btn-primary mb-2" type="submit">Register</button>
+                    </div>
+                </form>
+
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}
