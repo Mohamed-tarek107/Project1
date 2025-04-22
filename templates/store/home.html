@@ -1,0 +1,34 @@
+{% extends "layoutinside.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block main %}
+<div style="height: 100vh; background-color: #121212; display: flex; align-items: center; justify-content: center;">
+    
+  <div class="style">
+      <h1 class="display-4 text-white">Welcome</h1>
+      <h2 id="username" class="text-light mt-3"></h2>
+  </div>
+
+</div>
+
+<script>
+    
+    const username = "{{ username }}";
+    const target = document.getElementById("username");
+    let index = 0;
+
+    function typeUsername() {
+        if (index < username.length) {
+            target.innerHTML += username.charAt(index);
+            index++;
+            setTimeout(typeUsername, 150);
+        }
+    }
+
+    window.onload = typeUsername;
+</script>
+{% endblock %}

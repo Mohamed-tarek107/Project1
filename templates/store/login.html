@@ -10,23 +10,21 @@
             <div class="card p-4" style="width: 400px;">
                 <form action="{{ url_for('login') }}" method="post">
                     <div class="mb-4">
-                        <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="email">
+                        <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Email" type="email" required>
                     </div>
                     <div class="mb-4">
-                        <input class="form-control" name="password" placeholder="Password" type="password">
+                        <input class="form-control" name="password" placeholder="Password" type="password" required>
                     </div>
                     <div class="d-grid">
-                        <!-- Log In Button -->
-                        <button class="btn btn-primary mb-2" type="submit">Log In</button>
-                        
-                        <!-- Register Link (Fixed) -->
-                        <a class="btn btn-secondary" href="{{ url_for('register') }}">Register</a>
+                        <!-- Login Button -->
+                        <button class="btn btn-primary mb-2" type="submit">Login</button>
                     </div>
                 </form>
-
-                <!-- Forget Password Button -->
-                <div class="text-center mt-4">
-                    <a class="btn btn-secondary" href="{{ url_for('forget') }}">Forgot Password?</a>
+                <div class="text-center">
+                    <!-- Register Link -->
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+                    <!-- Forgot Password Link -->
+                    <p>Forgot your password? <a href="{{ url_for('forget') }}">Reset it here</a></p>
                 </div>
             </div>
         </div>
