@@ -1,4 +1,6 @@
 Flask
 Flask-Session
-Werkzeug
+Werkzeug.security
 cs50
+datetime
+functools

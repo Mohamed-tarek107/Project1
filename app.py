@@ -141,6 +141,14 @@ def forget():
 
     return render_template("store/forget.html")
 
+
+@app.route("/logout")
+@login_required
+def logout():
+        session.clear()
+        return redirect("/")
+
+
 @app.route("/home")
 @login_required  
 def home():
@@ -151,16 +159,31 @@ def home():
 
 
 
-@app.route("/logout")
-@login_required
-def logout():
-        session.clear()
-        return redirect("/")
-
 
 @app.route("/inventory")
 @login_required
 def inventory():
+    
+    return render_template("store/inventory.html")
+    
+
+
+@app.route("/orders")
+@login_required
+def orders():
+
+    return render_template("store/orders.html")
+    
+
+
+
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    
+    return render_template("store/dashboard.html")
     
 
 
@@ -168,9 +191,5 @@ def inventory():
 
 
 
-
-
-
-
-    if __name__ == "__main__":
+if __name__ == "__main__":
      app.run(debug=True)
