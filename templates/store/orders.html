@@ -1,8 +1,59 @@
 {% extends "layoutinside.html" %}
 
-{% block title %}Inventory{% endblock %}
+{% block title %}Orders{% endblock %}
 
-{% block body %}
+{% block main %}
+<div class="inventory-container">
+    <button id="openBtn" class="btn btn-primary mb-3">Add Item</button>
 
+    <div id="overlay"></div>
 
+    <div id="popup">
+        <span id="closeBtn" class="close-btn">×</span>
+        <form id="additemform" action="{{ url_for('order_add') }}" method="POST">
+            <div class="mb-3">
+                <select name="Product" required>
+                    <option value="" disabled selected>Select Product</option>
+                    {% for item in items %}
+                    <option value="{{ item['name'] }}">{{ item['id'] }}: ّ{{ item['name'] }} ({{ item['stock'] }} Left)</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <label>Quantity</label><br>
+            <input type="number" name="quantity" required min="1" class="form-control mb-2"><br>
+            <button type="submit" class="btn btn-success">Order!</button>
+        </form>
+    </div>
+
+    <table class="table table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>TimeStamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                {% for item in items %}
+                    {% if item['id'] == order['product_id'] %}
+                    <tr>
+                        <td>{{ order['id'] }}</td>
+                        <td>{{ order['product_id'] }}</td>
+                        <td>{{ item['name'] }}</td>
+                        <td>{{ item['price'] }}</td>
+                        <td>{{ order['quantity_ordered'] }}</td>
+                        <td>{{ item['price'] * order['quantity_ordered'] }}</td>
+                        <td>{{ order['order_date'] }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

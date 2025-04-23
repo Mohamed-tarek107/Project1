@@ -26,6 +26,7 @@
     <table class="table table-striped mt-4">
         <thead class="table-dark">
             <tr>
+                <th>Product ID</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Stock Available</th>
@@ -35,10 +36,11 @@
         <tbody>
             {% for item in items %}
             <tr>
-                <td>{{ item['name'] }}</td>
-                <td>{{ item['price'] }}</td>
-                <td>{{ item['stock'] }}</td>
-                <td>{{ item['created_at'] }}</td>
+                <td class="white-text">{{item['id'] }}</td>
+                <td class="white-text">{{ item['name'] }}</td>
+                <td class="white-text">{{ item['price'] }}</td>
+                <td class="white-text">{{ item['stock'] }}</td>
+                <td class="white-text">{{ item['created_at'] }}</td>
             </tr>
             {% endfor %}
         </tbody>

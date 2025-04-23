@@ -174,6 +174,7 @@ def inventory():
 @app.route("/add_item", methods=["POST"])
 @login_required
 def add_item():
+    user_id = session.get("user_id") 
     name = request.form.get("name")
     price = request.form.get("price")
     stock = request.form.get("stock")
@@ -182,21 +183,58 @@ def add_item():
         flash("Must Provide Product/Service details", "danger")
         return redirect(url_for('inventory'))
     
-    db.execute("INSERT INTO inventory (name, price, stock) VALUES (?, ?, ?)", (name, price, stock))
-    db.commit()
+    db.execute("INSERT INTO inventory (user_id ,name, price, stock) VALUES (?, ?, ?, ?)", user_id , name, price, stock)
 
     flash ("Item added!","success")
     return redirect("/inventory")
 
-@app.route("/orders")
+
+
+@app.route("/orders", methods=["GET","POST"])
 @login_required
 def orders():
-
-    return render_template("store/orders.html")
+    
+    user_id = session.get("user_id")
+    items = db.execute("SELECT * FROM inventory WHERE user_id = ?", user_id)
+    orders = db.execute("SELECT * FROM orders WHERE user_id = ?", user_id)
+    
+    return render_template("store/orders.html", items=items, orders=orders)
     
 
 
+@app.route("/order_add", methods=["POST"])
+@login_required
+def order_add():
+    user_id = session.get("user_id")
+    name = request.form.get("product")
+    quantity = request.form.get("quantity")
+    
+    if not name or not quantity:
+        flash("Must Provide All Info", "danger")
+        return redirect("/orders")
 
+    quantity = int(quantity)
+    if quantity <= 0:
+        flash("Quantity must be positive", "danger")
+        return redirect("/orders")
+    
+    item = db.execute("SELECT * FROM inventory WHERE user_id = ? AND name = ?", user_id , name)
+    
+    if not item:
+        flash("Product not fount", "danger")
+        return redirect("/orders")
+    
+    item = item[0]
+
+    if quantity > item["stock"]:
+        flash("Not enough stock available", "danger")
+        return redirect("/orders")
+
+    db.execute("INSERT INTO orders (user_id,name,quantity_ordered,product_id) VALUES (?, ?, ?, ?)", (user_id ,name, quantity, product_id))
+    db.execute("UPDATE inventory SET stock = stock - ? WHERE id = ? AND user_id = ?", quantity , item["id"], user_id)
+
+    flash("Order Added Successfully", "success")
+    return redirect("/orders")
 
 
 @app.route("/dashboard")

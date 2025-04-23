@@ -11,7 +11,7 @@ body {
 
 
 .login-page {
-    background-image: url("/static/img/galaxy.jpg"); /* URL fixed to be Flask-compatible */
+    background-image: url("/static/img/galaxy.jpg"); 
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -109,4 +109,16 @@ body {
 
 .form-control {
     width: 100%;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: transparent !important;
+}
+
+.table-striped tbody tr td {
+    color: white !important;
 }
