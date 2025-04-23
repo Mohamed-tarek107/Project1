@@ -6,6 +6,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 
+
 app = Flask(__name__)
 
 # Database setup
@@ -160,13 +161,32 @@ def home():
 
 
 
-@app.route("/inventory")
+@app.route("/inventory", methods=["GET","POST"])
 @login_required
 def inventory():
+    user_id = session.get("user_id")
+    items = db.execute("SELECT * FROM inventory WHERE user_id = ?", user_id)
     
-    return render_template("store/inventory.html")
+    return render_template("store/inventory.html", items=items)
     
 
+
+@app.route("/add_item", methods=["POST"])
+@login_required
+def add_item():
+    name = request.form.get("name")
+    price = request.form.get("price")
+    stock = request.form.get("stock")
+
+    if not name or not price or not stock:
+        flash("Must Provide Product/Service details", "danger")
+        return redirect(url_for('inventory'))
+    
+    db.execute("INSERT INTO inventory (name, price, stock) VALUES (?, ?, ?)", (name, price, stock))
+    db.commit()
+
+    flash ("Item added!","success")
+    return redirect("/inventory")
 
 @app.route("/orders")
 @login_required

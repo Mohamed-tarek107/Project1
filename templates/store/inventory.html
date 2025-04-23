@@ -2,7 +2,46 @@
 
 {% block title %}Inventory{% endblock %}
 
-{% block body %}
+{% block main %}
+<div class="inventory-container">
+    <button id="openBtn" class="btn btn-primary mb-3">Add Item</button>
 
+    <div id="overlay"></div>
 
+    <div id="popup">
+        <span id="closeBtn" class="close-btn">×</span>
+        <form id="additemform" action="{{ url_for('add_item') }}" method="POST">
+            <label>Product/Service Name:</label><br>
+            <input type="text" name="name" required class="form-control mb-2"><br>
+
+            <label>Price: (in EGP/USD)</label><br>
+            <input type="number" name="price" required class="form-control mb-2"><br>
+
+            <label>Available Stock:</label><br>
+            <input type="number" name="stock" required class="form-control mb-2"><br>
+            <button type="submit" class="btn btn-success">Add Item</button>
+        </form>
+    </div>
+
+    <table class="table table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock Available</th>
+                <th>TimeStamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['price'] }}</td>
+                <td>{{ item['stock'] }}</td>
+                <td>{{ item['created_at'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

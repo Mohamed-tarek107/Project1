@@ -2,12 +2,12 @@
 __pycache__/
 *.pyc
 
-# Ignore virtual environment (if you're using one)
+
 venv/
 env/
 
 # Ignore environment variables
 .env
 
-# Ignore VS Code settings (optional)
+# Ignore VS Code settings 
 .vscode/
