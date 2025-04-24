@@ -12,7 +12,7 @@
         <span id="closeBtn" class="close-btn">×</span>
         <form id="additemform" action="{{ url_for('order_add') }}" method="POST">
             <div class="mb-3">
-                <select name="Product" required>
+                <select name="product" required>
                     <option value="" disabled selected>Select Product</option>
                     {% for item in items %}
                     <option value="{{ item['name'] }}">{{ item['id'] }}: ّ{{ item['name'] }} ({{ item['stock'] }} Left)</option>

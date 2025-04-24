@@ -12,13 +12,13 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="{{ url_for('static', filename='img/logo.gif') }}" alt="Logo" class="logo">
-                 Inventory Managmement System
+                Inventory Managmement System
             </a>
         </div>
     </nav>
 
     <!--flashes with bootstrap-->
-    <div class="flashes">
+      <div class="flashes" id="flash-messages">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}
@@ -29,7 +29,8 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
-      </div>
+    </div>
+    
       
     <div class="container mt-5">
         {% block main %}{% endblock %}

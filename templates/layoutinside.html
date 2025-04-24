@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/inventory">Inventory</a>
@@ -40,7 +40,20 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/guide">Guide</a></li>
-                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                         
+                            <!-- Settings Dropdown Trigger -->
+                        <li><a class="dropdown-item" href="#" id="openBtnSettings">Settings</a></li>
+
+                        <!-- Settings Popup -->
+                        <div id="overlaySettings" style="display: none;"></div>
+                        <div id="popupSettings" style="display: none;">
+                            <h2>Settings</h2>
+                            <h3>Security</h3>
+                            <a href="{{ url_for('forget') }}">Reset Password</a>
+                            <button id="closeBtnSettings">X</button>
+                        </div>
+
+
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
@@ -53,7 +66,7 @@
         </div>
     </nav>
 
-    <div class="flashes">
+    <div class="flashes" id="flash-messages">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
             {% for category, message in messages %}

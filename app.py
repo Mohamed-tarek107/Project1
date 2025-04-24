@@ -229,15 +229,17 @@ def order_add():
     if quantity > item["stock"]:
         flash("Not enough stock available", "danger")
         return redirect("/orders")
+    
+    print("DEBUG:", user_id, name, quantity, item["id"])
 
-    db.execute("INSERT INTO orders (user_id,name,quantity_ordered,product_id) VALUES (?, ?, ?, ?)", (user_id ,name, quantity, product_id))
-    db.execute("UPDATE inventory SET stock = stock - ? WHERE id = ? AND user_id = ?", quantity , item["id"], user_id)
+    # Fix: Pass values directly as individual arguments
+    db.execute("INSERT INTO orders (user_id, quantity_ordered, product_id) VALUES (?, ?, ?)", user_id, quantity, item["id"])
+    db.execute("UPDATE inventory SET stock = stock - ? WHERE id = ? AND user_id = ?",quantity, item["id"], user_id)
 
     flash("Order Added Successfully", "success")
     return redirect("/orders")
 
-
-@app.route("/dashboard")
+@app.route("/dashboard", methods=["GET","POST"]) 
 @login_required
 def dashboard():
     
@@ -245,9 +247,11 @@ def dashboard():
     
 
 
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
 
 
 
-
-if __name__ == "__main__":
+ if __name__ == "__main__":
      app.run(debug=True)

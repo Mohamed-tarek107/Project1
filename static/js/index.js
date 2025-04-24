@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Debugging: Log all found elements
-    console.log('DOM fully loaded, running inventory.js');
     
     const elements = {
         openBtn: document.getElementById("openBtn"),
@@ -27,9 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay: document.getElementById("overlay"),
         popup: document.getElementById("popup")
     };
-
-    // Verify all elements exist
-    for (const [name, element] of Object.entries(elements)) {
+        for (const [name, element] of Object.entries(elements)) {
         if (!element) {
             console.error(`Element ${name} not found!`);
             return;
@@ -59,4 +55,59 @@ document.addEventListener('DOMContentLoaded', function() {
             closePopup();
         }
     });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Settings Popup
+    const settings = {
+        openBtn: document.getElementById("openBtnSettings"),
+        closeBtn: document.getElementById("closeBtnSettings"),
+        overlay: document.getElementById("overlaySettings"),
+        popup: document.getElementById("popupSettings")
+    };
+
+    if (settings.openBtn && settings.closeBtn && settings.overlay && settings.popup) {
+        settings.openBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            settings.popup.style.display = 'block';
+            settings.overlay.style.display = 'block';
+        });
+
+        settings.closeBtn.addEventListener('click', function () {
+            settings.popup.style.display = 'none';
+            settings.overlay.style.display = 'none';
+        });
+
+        settings.overlay.addEventListener('click', function () {
+            settings.popup.style.display = 'none';
+            settings.overlay.style.display = 'none';
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && settings.popup.style.display === 'block') {
+                settings.popup.style.display = 'none';
+                settings.overlay.style.display = 'none';
+            }
+        });
+    
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const flashContainer = document.getElementById('flash-messages');
+    
+    if (flashContainer) {
+        setTimeout(function() {
+            const alerts = flashContainer.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                alert.classList.add('fade-out');
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 500);
+            });
+        }, 1700);
+    }
 });
