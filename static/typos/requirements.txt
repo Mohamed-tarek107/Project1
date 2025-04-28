@@ -4,3 +4,4 @@ Werkzeug.security
 cs50
 datetime
 functools
+chart.js

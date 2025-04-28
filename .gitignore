@@ -11,3 +11,7 @@ env/
 
 # Ignore VS Code settings 
 .vscode/
+
+package-lock.json
+
+package.json
