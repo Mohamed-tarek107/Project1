@@ -167,7 +167,7 @@ def inventory():
     user_id = session.get("user_id")
     items = db.execute("SELECT * FROM inventory WHERE user_id = ?", user_id)
     
-    return render_template("store/inventory.html", items=items)
+    return render_template("store/inventory.html", items=items, active_page="inventory")
     
 
 
@@ -198,7 +198,7 @@ def orders():
     items = db.execute("SELECT * FROM inventory WHERE user_id = ?", user_id)
     orders = db.execute("SELECT * FROM orders WHERE user_id = ?", user_id)
     
-    return render_template("store/orders.html", items=items, orders=orders)
+    return render_template("store/orders.html", items=items, orders=orders, active_page="orders")
     
 
 
@@ -268,18 +268,10 @@ def dashboard():
 
     
     return render_template("store/dashboard.html", labels=labels, values=values, 
-                        orderlabels=orderlabels, ordervalues=ordervalues , revenue_labels=revenue_labels, revenue_values=revenue_values)
+                        orderlabels=orderlabels, ordervalues=ordervalues , revenue_labels=revenue_labels, revenue_values=revenue_values, active_page="dashboard")
     
 
 
-@app.route("/guide", methods=["GET","POST"]) 
-@login_required
-def guide():
-    user_id = session.get["user_id"]
-    name = db.execute("SELECT username FROM users WHERE id = ?", user_id)
-    
-
-    return render_template("store/guide.html", name=name)
 
 
 if __name__ == "__main__":
