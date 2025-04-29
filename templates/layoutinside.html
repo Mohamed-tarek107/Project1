@@ -39,20 +39,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/guide">Guide</a></li>
-                    
-                            <!-- Settings Dropdown Trigger -->
-                        <li><a class="dropdown-item" href="#" id="openBtnSettings">Settings</a></li>
-
-                        <!-- Settings Popup -->
-                        <div id="overlaySettings" style="display: none;"></div>
-                        <div id="popupSettings" style="display: none;">
-                            <h2>Settings</h2>
-                            <h3>Security</h3>
-                            <a href="{{ url_for('forget') }}">Reset Password</a>
-                            <button id="closeBtnSettings">X</button>
-                        </div>
-
-
+                            
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
@@ -83,6 +70,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 </body>
 </html>

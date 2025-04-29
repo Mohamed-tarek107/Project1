@@ -174,3 +174,86 @@ body {
 .alert.fade-out {
     opacity: 0;
 }
+
+
+/* Dashboard container styling */
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: center; /* Center the charts horizontally */
+    gap: 20px;
+    color: white; /* Set all text inside the dashboard container to white */
+}
+
+/* Styling for the upper two charts (pie/donut) */
+.chart-container.pie-chart {
+    width: 45%; /* Make the pie/donut charts smaller */
+    height: 300px; /* Adjust height automatically */
+    flex: 1 1 45%; /* Allow flexibility for responsive design */
+    background-color: rgba(173, 216, 230, 0.5); /* Light blue background */
+    border: 2px solid #87CEEB; /* Blue border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: white; /* Ensure text inside the pie chart containers is white */
+}
+
+/* Styling for the bottom bar chart */
+.chart-container.bar-chart {
+    width: 90%; /* Make the bar chart wider */
+    height: 400px; /* Adjust height automatically */
+    flex: 1 1 90%; /* Allow flexibility for responsive design */
+    background-color: rgba(240, 230, 140, 0.5); /* Light yellow background */
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: white; /* Ensure text inside the bar chart container is white */
+}
+
+/* Chart titles */
+.chart-container h3 {
+    text-align: center; /* Center the title */
+    font-size: 16px; /* Smaller font size for the title */
+    margin-bottom: 10px; /* Space between title and chart */
+    color: white; /* Make chart titles white */
+    font-family: Arial, sans-serif; /* Clean font */
+}
+
+/* Chart canvas styling */
+.chart-container canvas {
+    display: block;
+    margin: 0 auto; /* Center the chart */
+    max-width: 100%; /* Ensure the chart fits within the container */
+    height: 200px; /* Fixed height for consistency */
+    color: white; /* Ensure chart labels and numbers are white */
+}
+
+/* Chart.js tooltips and labels */
+.chartjs-render-monitor {
+    color: white !important; /* Ensure Chart.js tooltips and labels are white */
+}
+
+/* Axes labels for bar and line charts */
+.chart-container canvas {
+    color: white; /* Ensure axes labels and numbers are white */
+}
+
+
+
+/*all of them */
+.chart-container text,
+.chartjs-render-monitor text,
+.chartjs-tooltip,
+.chartjs-tooltip *,
+.chartjs-axis text,
+.chartjs-legend text,
+.chartjs-scale text {
+    fill: white !important;
+    color: white !important;
+}
+
+/* Canvas-specific text (Chart.js v3+) */
+.chart-container canvas {
+    color: white !important;
+}

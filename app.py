@@ -241,12 +241,46 @@ def order_add():
 @login_required
 def dashboard():
     
+    user_id = session.get("user_id")
+    productrows = db.execute("SELECT id, name, stock, price FROM inventory WHERE user_id = ?", user_id)
+    orderrows = db.execute("SELECT product_id, quantity_ordered, order_date FROM orders WHERE user_id = ?", user_id)
     
-    return render_template("store/dashboard.html")
+    #list comprihantion
+    labels = [row["name"] for row in productrows]
+    values = [row["stock"] for row in productrows]
+    
+    orderlabels = [row["product_id"] for row in orderrows]
+    ordervalues = [row["quantity_ordered"] for row in orderrows]
+    product_prices = {row["id"]: row["price"] for row in productrows}
+
+    revenues_with_time = []
+    for row in orderrows:
+        product_id = row["product_id"]
+        quantity = row["quantity_ordered"]
+        order_date = row["order_date"]
+        price = product_prices.get(product_id, 0)
+        revenue = price * quantity
+        revenues_with_time.append((order_date, revenue))
+
+
+    revenue_labels = [r[0] for r in revenues_with_time]
+    revenue_values = [r[1] for r in revenues_with_time]
+
+    
+    return render_template("store/dashboard.html", labels=labels, values=values, 
+                        orderlabels=orderlabels, ordervalues=ordervalues , revenue_labels=revenue_labels, revenue_values=revenue_values)
     
 
 
+@app.route("/guide", methods=["GET","POST"]) 
+@login_required
+def guide():
+    user_id = session.get["user_id"]
+    name = db.execute("SELECT username FROM users WHERE id = ?", user_id)
+    
+
+    return render_template("store/guide.html", name=name)
 
 
 if __name__ == "__main__":
-     app.run(debug=True)
+    app.run(debug=True)

@@ -2,7 +2,37 @@
 
 {% block title %}Dashboard{% endblock %}
 
-{% block body %}
+{% block main %}
 
+<div class="dashboard-container">
+    
+    <div class="chart-container pie-chart">
+        <h3>Product Sales Chart</h3>
+        <canvas id="chart1"></canvas>
+    </div>
+    <div class="chart-container pie-chart">
+        <h3>Revenue Chart</h3>
+        <canvas id="chart2"></canvas>
+    </div>
+
+    <!-- Second row: Stock Levels Chart -->
+    <div class="chart-container bar-chart">
+        <h3>Stock Levels Chart</h3>
+        <canvas id="chart3"></canvas>
+    </div>
+</div>
+
+<div id="chart-data" 
+    data-labels='{{ labels | tojson | safe }}' 
+    data-values='{{ values | tojson | safe }}' 
+    data-orderlabels='{{ orderlabels | tojson | safe }}' 
+    data-ordervalues='{{ ordervalues | tojson | safe }}' 
+    data-revenuelabels='{{ revenue_labels | tojson | safe }}' 
+    data-revenuevalues='{{ revenue_values | tojson | safe }}' 
+    hidden>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/chart.js') }}"></script>
 
 {% endblock %}
